@@ -1,24 +1,32 @@
-results=document.querySelector('.results');
-btnSearch=document.querySelector('.btn-search');
+let results = document.querySelector('.results');
+let btnSearch = document.querySelector('#btn-search');
+let search = document.querySelector('input');
 
 let data;
+let baseUrl = 'https://emoji-api.com/emojis?access_key=54d698da601f06286336cd65b3698edfb16d22bc';
+let url = baseUrl;
 
-let url='https://emoji-api.com/emojis?access_key=54d698da601f06286336cd65b3698edfb16d22bc';
+async function getEmojis() {
+    // Clear previous results
+    results.innerHTML = '';
 
-async function findEmojis(){
-    let response=await fetch(url);
-    data=await response.json();
+    let response = await fetch(url);
+    data = await response.json();
 
-    
+    for (let i = 0; i < data.length; i++) {
+        let result = document.createElement('div');
+        result.innerText = data[i].character + ' ' + data[i].unicodeName;
+        results.appendChild(result);
+    }
 }
 
-for(let i=0;i<100;i++){
-    let result=document.createElement('div');
-    result.innerText=data[i].character+'  '+data[i].unicodeName;
-    result.appendChild(results);
-}
+btnSearch.addEventListener('click', async () => {
+    // Update the URL with the search term
+    url = baseUrl + '&search=' + encodeURIComponent(search.value);
 
-btnSearch.addEventListener('click',async ()=>{
-    let s=btnSearch.value;
+    // Fetch and display new emojis
+    await getEmojis();
+});
 
-})
+// Initial display without search term
+getEmojis();
