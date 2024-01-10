@@ -7,7 +7,6 @@ let baseUrl = 'https://emoji-api.com/emojis?access_key=54d698da601f06286336cd65b
 let url = baseUrl;
 
 async function getEmojis() {
-    // Clear previous results
     results.innerHTML = '';
 
     let response = await fetch(url);
@@ -21,12 +20,9 @@ async function getEmojis() {
 }
 
 btnSearch.addEventListener('click', async () => {
-    // Update the URL with the search term
     url = baseUrl + '&search=' + encodeURIComponent(search.value);
 
-    // Fetch and display new emojis
     await getEmojis();
 });
 
-// Initial display without search term
 getEmojis();
