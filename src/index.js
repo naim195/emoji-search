@@ -1,3 +1,5 @@
+import './style.css'
+
 let results = document.querySelector('.results');
 let btnSearch = document.querySelector('#btn-search');
 let search = document.querySelector('input');
