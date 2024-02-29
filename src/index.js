@@ -22,9 +22,10 @@ async function getEmojis() {
 }
 
 btnSearch.addEventListener('click', async () => {
-    url = baseUrl + '&search=' + encodeURIComponent(search.value);
+    console.log("clicked.")
+    url = baseUrl + '&search=' + search.value;
 
     await getEmojis();
 });
 
-getEmojis();
+
